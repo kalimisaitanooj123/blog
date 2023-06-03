@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Login Form Example</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="{%static 'css/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="login-form">
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="er">{{error}}</p>
+        {% endfor %}
+    {% endif %}
+    <h1>Login</h1>
+    <div class="content">
+      <div class="input-field">
+          <table>
+    {% for fm in form %}
+        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+    {% endfor %}
+    </table>
+      </div>
+      <a href="#" class="link">Forgot Your Password?</a>
+    </div>
+    <div class="action">
+      <input type="button"><button>Sign in</button>
+      <button><a href="{% url 'signup' %}">Register</a></button> </div>
+  </form>
+</div>
+    {% if messages %}
+    {% for message in messages %}
+        <small {% if message.tags %} class="{{message.tags}}" {% endif %}></small>
+    {% endfor%}
+{% endif %}    {% if messages %}
+    {% for message in messages %}
+        <small {% if message.tags %} class="{{message.tags}}" {% endif %}></small>
+    {% endfor%}
+{% endif %}
+<!-- partial -->
+  <script  src="{%static 'js/script.css' %}"></script>
+
+</body>
+</html>
+{% endblock content %}

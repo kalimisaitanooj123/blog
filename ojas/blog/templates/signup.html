@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<!---Coding By CodingLab | www.codinglabweb.com--->
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Login Form Example</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="{%static 'css/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="login-form">
+  <h1>Registration Form</h1>
+<form action="" method="post" novalidate>
+                {% csrf_token %}
+     {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="er">{{error}}</p>
+        {% endfor %}
+
+     {% endif %}
+      <div class="content">
+      <div class="input-field">
+          <table>
+     {% for fm in form %}
+        {{fm.label_tag}}
+            {{fm}} {{fm.errors|striptags}} <br><br>
+     {% endfor %}
+          </table></div></div>
+    <div class="action">
+      <input type="button"><button>Submit</button>
+    </div>
+</form></div>
+
+{% if messages %}
+    {% for message in messages %}
+ <small {% if message.tags %} class="{{message.tags}}" {% endif %}><center><h2>{{message}}</h2></center></small>
+    {% endfor%}
+{% endif %}
+</div>
+    </section>
+  </body>
+  <script  src="{%static 'js/script.css' %}"></script>
+</html>
+
+{% endblock content %}
+
